@@ -1,6 +1,9 @@
 const start = document.getElementById('startGame');
 const end = document.getElementById('gameOver');
-const btn = document.getElementById('startBtn');
+const btn1 = document.getElementById('startBtn');
+const btn2 = document.getElementById('endBtn');
+const btn3 = document.getElementById('fullscreenBtn');
+const btn4 = document.getElementById('soundsBtn');
 
 let canvas;
 let scl = 20;
@@ -100,14 +103,47 @@ class Food {
     }
 }
 
+function startGame() {
+    noLoop();
+    start.classList.add('visible');
+    btn1.addEventListener('click', () => {
+        start.classList.remove('visible');
+        loop();
+    });
+}
+
+function endGame() {
+    noLoop();
+    end.classList.add('visible');
+    btn2.addEventListener('click', () => {
+        start.classList.remove('visible');
+        location.reload();
+    });
+}
+
+function fullscreenToggle() {
+    let j = 0;
+    btn3.addEventListener('click', () => {
+        if (j % 2 == 0) btn3.classList.add('selected');
+        else btn3.classList.remove('selected');
+        let fs = fullscreen();
+        fullscreen(!fs);
+        j++;
+    });
+}
+
+function soundsToggle() {
+    btn4.addEventListener('click', () => {
+
+    });
+}
+
 function setup() {
     canvas = createCanvas(displayWidth / 1.5, displayHeight / 1.5);
     canvas.parent('myCanvas');
-    start.classList.add('visible');
-    btn.addEventListener('click', () => {
-        start.classList.remove('visible');
-    });
     frameRate(10);
+    fullscreenToggle();
+    startGame();
     snake = new Snake(0, 0, 1, 0);
     snake.grow();
     food = new Food();
@@ -120,9 +156,6 @@ function draw() {
     snake.controls();
     snake.move();
     snake.draw();
-    if (snake.end()) {
-        noLoop();
-        end.classList.add('visible');
-    }
+    if (snake.end()) endGame();
     food.draw();
 }

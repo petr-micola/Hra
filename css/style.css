@@ -20,6 +20,18 @@ body {
     display: block !important;
 }
 
+.selected {
+    background-color: rgb(160, 68, 247);
+}
+
+#info {
+    font-size: x-small;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99;
+}
+
 #myCanvas {
     position: absolute;
 }
@@ -32,9 +44,21 @@ body {
     z-index: 10;
 }
 
-#startBtn {
+#startBtn,
+#endBtn,
+#fullscreenBtn,
+#soundsBtn {
     cursor: pointer;
     border-radius: 0.2rem;
-    background-color: rgb(160, 68, 247);
     padding: 0.3em;
+}
+
+#startBtn,
+#endBtn {
+    background-color: rgb(160, 68, 247);
+}
+
+#fullscreenBtn,
+#soundsBtn {
+    border: 2px solid rgb(160, 68, 247);
 }
