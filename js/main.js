@@ -5,6 +5,7 @@ const btn2 = document.getElementById('endBtn');
 const btn3 = document.getElementById('fullscreenBtn');
 const btn4 = document.getElementById('soundsBtn');
 
+let sound1, sound2;
 let canvas;
 let scl = 20;
 let snake;
@@ -133,9 +134,19 @@ function fullscreenToggle() {
 }
 
 function soundsToggle() {
+    sound1.setVolume(0.0);
+    sound2.setVolume(0.0);
     btn4.addEventListener('click', () => {
-
+        btn4.classList.add('selected');
+        sound1.setVolume(1.0);
+        sound2.setVolume(1.0);
     });
+}
+
+function preload() {
+    soundFormats('mp3');
+    sound1 = loadSound('sound/1.mp3');
+    sound2 = loadSound('sound/2.mp3');
 }
 
 function setup() {
@@ -143,6 +154,7 @@ function setup() {
     canvas.parent('myCanvas');
     frameRate(10);
     fullscreenToggle();
+    soundsToggle();
     startGame();
     snake = new Snake(0, 0, 1, 0);
     snake.grow();
@@ -152,10 +164,16 @@ function setup() {
 
 function draw() {
     background(33, 33, 36);
-    if (snake.eat(food.x, food.y)) food.location();
+    if (snake.eat(food.x, food.y)) {
+        sound1.play();
+        food.location();
+    }
     snake.controls();
     snake.move();
     snake.draw();
-    if (snake.end()) endGame();
+    if (snake.end()) {
+        sound2.play();
+        endGame();
+    }
     food.draw();
 }
