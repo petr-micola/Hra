@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Press Start 2P', cursive;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #44444a;
+}
+
+.visible {
+    display: block !important;
+}
+
+#myCanvas {
+    position: absolute;
+}
+
+#startGame,
+#gameOver {
+    display: none;
+    background-color: #44444a;
+    padding: 2em;
+    z-index: 10;
+}
+
+#startBtn {
+    cursor: pointer;
+    border-radius: 0.2rem;
+    background-color: rgb(160, 68, 247);
+    padding: 0.3em;
+}
