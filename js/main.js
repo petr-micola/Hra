@@ -81,8 +81,8 @@ class Snake {
 
     draw() {
         for (let i = 0; i < this.body.length; i++) {
-            fill('rgba(255, 255, 255, 0.87)');
-            rect(this.body[i].x, this.body[i].y, scl, scl, 5);
+            fill('#ffffff');
+            rect(this.body[i].x, this.body[i].y, scl, scl);
         }
     }
 }
@@ -102,8 +102,8 @@ class Food {
     }
 
     draw() {
-        fill(160, 68, 247);
-        rect(this.x, this.y, scl, scl, 5);
+        fill('#16c60c');
+        rect(this.x, this.y, scl, scl);
     }
 }
 
@@ -164,6 +164,8 @@ function setup() {
     canvas = createCanvas(displayWidth / 1.5, displayHeight / 1.5);
     canvas.parent('myCanvas');
     frameRate(10);
+    stroke('#000000');
+    strokeWeight(2);
     fullscreenToggle();
     soundsToggle();
     startGame();
@@ -174,7 +176,7 @@ function setup() {
 }
 
 function draw() {
-    background(33, 33, 36);
+    background('#000000');
     if (snake.eat(food.x, food.y)) {
         sound1.play();
         food.location();

@@ -12,8 +12,10 @@ body {
     justify-content: center;
     align-items: center;
     font-family: 'Press Start 2P', cursive;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #44444a;
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 3px 3px 0px #000000;
+    background-color: #212124;
 }
 
 .visible {
@@ -21,7 +23,7 @@ body {
 }
 
 .selected {
-    background-color: rgb(160, 68, 247);
+    background-color: #16c60c;
 }
 
 #info {
@@ -39,9 +41,18 @@ body {
 #startGame,
 #gameOver {
     display: none;
-    background-color: #44444a;
+    background-color: #212124;
     padding: 2em;
     z-index: 10;
+}
+
+#startBtn:hover,
+#endBtn:hover {
+    color: #16c60c;
+}
+
+#endBtn {
+    font-size: x-small;
 }
 
 #startBtn,
@@ -49,16 +60,10 @@ body {
 #fullscreenBtn,
 #soundsBtn {
     cursor: pointer;
-    border-radius: 0.2rem;
-    padding: 0.3em;
-}
-
-#startBtn,
-#endBtn {
-    background-color: rgb(160, 68, 247);
 }
 
 #fullscreenBtn,
 #soundsBtn {
-    border: 2px solid rgb(160, 68, 247);
+    padding: 0.2em;
+    border: 2px solid #16c60c;
 }
