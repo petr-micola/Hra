@@ -96,6 +96,9 @@ class Food {
     location() {
         this.x = floor(random(this.w)) * scl;
         this.y = floor(random(this.h)) * scl;
+        for (let i = 0; i < snake.body.length - 1; i++) {
+            if (snake.body[i].x == this.x && snake.body[i].y == this.y) this.location();
+        }
     }
 
     draw() {
@@ -134,12 +137,20 @@ function fullscreenToggle() {
 }
 
 function soundsToggle() {
+    let j = 0;
     sound1.setVolume(0.0);
     sound2.setVolume(0.0);
     btn4.addEventListener('click', () => {
-        btn4.classList.add('selected');
-        sound1.setVolume(1.0);
-        sound2.setVolume(1.0);
+        if (j % 2 == 0) {
+            btn4.classList.add('selected');
+            sound1.setVolume(1.0);
+            sound2.setVolume(1.0);
+        } else {
+            btn4.classList.remove('selected');
+            sound1.setVolume(0.0);
+            sound2.setVolume(0.0);
+        }
+        j++;
     });
 }
 
