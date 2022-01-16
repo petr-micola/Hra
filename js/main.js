@@ -120,8 +120,12 @@ function endGame() {
     noLoop();
     end.classList.add('visible');
     btn2.addEventListener('click', () => {
-        start.classList.remove('visible');
-        location.reload();
+        end.classList.remove('visible');
+        snake = new Snake(0, 0, 1, 0);
+        snake.grow();
+        food = new Food();
+        loop();
+        food.location();
     });
 }
 
