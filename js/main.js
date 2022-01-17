@@ -2,6 +2,7 @@ const start = document.getElementById('startGame');
 const mode = document.getElementById('mode');
 const end = document.getElementById('gameOver');
 const info = document.getElementById('info');
+const goal = document.getElementById('goal');
 const btn1 = document.getElementById('startBtn');
 const btn2 = document.getElementById('endBtn');
 const btn3 = document.getElementById('fullscreenBtn');
@@ -16,6 +17,7 @@ let scl = 20;
 let snake;
 let food;
 let obstacles = [];
+let mission;
 
 class Snake {
     constructor(posX, posY, speedX, speedY) {
@@ -163,7 +165,11 @@ function modeSelect() {
         snake.grow();
         food = new Food();
         food.location();
+        mission = floor(random(10, 30));
+        goal.innerHTML = mission;
         obstacles.length = 0;
+        obstacles.push(new Obstacle());
+        obstacles.push(new Obstacle());
         obstacles.push(new Obstacle());
         obstacles.push(new Obstacle());
         obstacles.push(new Obstacle());
@@ -187,6 +193,13 @@ function endGame() {
         end.classList.remove('visible');
         modeSelect();
     });
+}
+
+function checkWin() {
+    if (snake.body.length == mission) {
+        end.innerHTML = 'Winner';
+        endGame();
+    }
 }
 
 function fullscreenToggle() {
@@ -254,4 +267,5 @@ function draw() {
     }
     food.draw();
     for (let i = 0; i < obstacles.length; i++) obstacles[i].draw();
+    checkWin();
 }

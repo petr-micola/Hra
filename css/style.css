@@ -68,7 +68,8 @@ body {
 #classicMode:hover,
 #menuBtn:hover,
 #info,
-#wasd {
+#wasd,
+#goal {
     color: #16c60c;
 }
 
@@ -92,7 +93,8 @@ body {
 #fullscreenBtn,
 #soundsBtn,
 #info,
-#wasd {
+#wasd,
+#goal {
     margin-right: 1em;
     margin-left: 1em;
 }
