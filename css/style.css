@@ -14,19 +14,21 @@ body {
     font-family: 'Press Start 2P', cursive;
     text-align: center;
     color: #ffffff;
+    font-size: x-large;
     text-shadow: 3px 3px 0px #000000;
     background-color: #212124;
 }
 
 .visible {
-    display: block !important;
+    visibility: visible !important;
 }
 
 .selected {
     background-color: #16c60c;
 }
 
-#settings, #infobox {
+#settings,
+#infobox {
     font-size: x-small;
     position: fixed;
     bottom: 30px;
@@ -46,28 +48,44 @@ body {
 }
 
 #startGame,
+#mode,
 #gameOver {
-    display: none;
-    background-color: #212124;
-    padding: 2em;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 400px;
+    height: 400px;
+    visibility: hidden;
+    background-color: #000000;
     z-index: 99;
 }
 
 #startBtn:hover,
 #endBtn:hover,
+#newMode:hover,
+#classicMode:hover,
+#menuBtn:hover,
 #info,
 #wasd {
     color: #16c60c;
 }
 
-#endBtn {
-    font-size: x-small;
+#endBtn,
+#newMode,
+#classicMode,
+#menuBtn {
+    font-size: small;
 }
 
 #startBtn,
 #endBtn,
 #fullscreenBtn,
-#soundsBtn {
+#soundsBtn,
+#newMode,
+#classicMode,
+#menuBtn {
     cursor: pointer;
 }
 

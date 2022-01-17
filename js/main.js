@@ -1,16 +1,21 @@
 const start = document.getElementById('startGame');
+const mode = document.getElementById('mode');
 const end = document.getElementById('gameOver');
 const info = document.getElementById('info');
 const btn1 = document.getElementById('startBtn');
 const btn2 = document.getElementById('endBtn');
 const btn3 = document.getElementById('fullscreenBtn');
 const btn4 = document.getElementById('soundsBtn');
+const btn5 = document.getElementById('newMode');
+const btn6 = document.getElementById('classicMode');
+const btn7 = document.getElementById('menuBtn');
 
 let sound1, sound2;
 let canvas;
 let scl = 20;
 let snake;
 let food;
+let obstacles = [];
 
 class Snake {
     constructor(posX, posY, speedX, speedY) {
@@ -75,6 +80,9 @@ class Snake {
 
     end() {
         if (this.head.x > width - 1 || this.head.x < 0 || this.head.y > height - 1 || this.head.y < 0) return true;
+        for (let i = 0; i < obstacles.length; i++) {
+            if (this.head.x == obstacles[i].x && this.head.y == obstacles[i].y) return true;
+        }
         for (let i = 0; i < this.body.length - 1; i++) {
             if (this.body[i].x == this.head.x && this.body[i].y == this.head.y) return true;
         }
@@ -109,11 +117,57 @@ class Food {
     }
 }
 
+class Obstacle {
+    constructor() {
+        this.w = floor(width / scl);
+        this.h = floor(height / scl);
+    }
+
+    location() {
+        this.x = floor(random(this.w)) * scl;
+        this.y = floor(random(this.h)) * scl;
+        for (let i = 0; i < snake.body.length - 1; i++) {
+            if (snake.body[i].x == this.x && snake.body[i].y == this.y) this.location();
+        }
+    }
+
+    draw() {
+        fill('#44444a');
+        rect(this.x, this.y, scl, scl);
+    }
+}
+
 function startGame() {
     noLoop();
     start.classList.add('visible');
     btn1.addEventListener('click', () => {
         start.classList.remove('visible');
+        modeSelect();
+    });
+}
+
+function modeSelect() {
+    mode.classList.add('visible');
+    btn6.addEventListener('click', () => {
+        mode.classList.remove('visible');
+        snake = new Snake(0, 0, 1, 0);
+        snake.grow();
+        food = new Food();
+        food.location();
+        obstacles.length = 0;
+        loop();
+    });
+    btn5.addEventListener('click', () => {
+        mode.classList.remove('visible');
+        snake = new Snake(0, 0, 1, 0);
+        snake.grow();
+        food = new Food();
+        food.location();
+        obstacles.length = 0;
+        obstacles.push(new Obstacle());
+        obstacles.push(new Obstacle());
+        obstacles.push(new Obstacle());
+        for (let i = 0; i < obstacles.length; i++) obstacles[i].location();
         loop();
     });
 }
@@ -128,6 +182,10 @@ function endGame() {
         food = new Food();
         loop();
         food.location();
+    });
+    btn7.addEventListener('click', () => {
+        end.classList.remove('visible');
+        modeSelect();
     });
 }
 
@@ -167,7 +225,7 @@ function preload() {
 }
 
 function setup() {
-    canvas = createCanvas(displayWidth / 1.5, displayHeight / 1.5);
+    canvas = createCanvas(400, 400);
     canvas.parent('myCanvas');
     frameRate(10);
     stroke('#000000');
@@ -195,4 +253,5 @@ function draw() {
         endGame();
     }
     food.draw();
+    for (let i = 0; i < obstacles.length; i++) obstacles[i].draw();
 }
