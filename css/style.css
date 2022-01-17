@@ -26,12 +26,19 @@ body {
     background-color: #16c60c;
 }
 
-#info {
+#settings, #infobox {
     font-size: x-small;
     position: fixed;
     bottom: 30px;
-    right: 30px;
     z-index: 99;
+}
+
+#settings {
+    right: 30px;
+}
+
+#infobox {
+    left: 30px;
 }
 
 #myCanvas {
@@ -43,11 +50,13 @@ body {
     display: none;
     background-color: #212124;
     padding: 2em;
-    z-index: 10;
+    z-index: 99;
 }
 
 #startBtn:hover,
-#endBtn:hover {
+#endBtn:hover,
+#info,
+#wasd {
     color: #16c60c;
 }
 
@@ -63,7 +72,16 @@ body {
 }
 
 #fullscreenBtn,
+#soundsBtn,
+#info,
+#wasd {
+    margin-right: 1em;
+    margin-left: 1em;
+}
+
+#fullscreenBtn,
 #soundsBtn {
-    padding: 0.2em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
     border: 2px solid #16c60c;
 }

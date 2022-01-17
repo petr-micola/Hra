@@ -1,5 +1,6 @@
 const start = document.getElementById('startGame');
 const end = document.getElementById('gameOver');
+const info = document.getElementById('info');
 const btn1 = document.getElementById('startBtn');
 const btn2 = document.getElementById('endBtn');
 const btn3 = document.getElementById('fullscreenBtn');
@@ -32,25 +33,25 @@ class Snake {
     }
 
     controls() {
-        if (keyIsDown(UP_ARROW)) {
+        if (keyIsDown(87)) {
             if (this.sY != 1) {
                 this.sX = 0;
                 this.sY = -1;
             }
         }
-        if (keyIsDown(DOWN_ARROW)) {
+        if (keyIsDown(83)) {
             if (this.sY != -1) {
                 this.sX = 0;
                 this.sY = 1;
             }
         }
-        if (keyIsDown(LEFT_ARROW)) {
+        if (keyIsDown(65)) {
             if (this.sX != 1) {
                 this.sX = -1;
                 this.sY = 0;
             }
         }
-        if (keyIsDown(RIGHT_ARROW)) {
+        if (keyIsDown(68)) {
             if (this.sX != -1) {
                 this.sX = 1;
                 this.sY = 0;
@@ -61,6 +62,7 @@ class Snake {
     grow() {
         let head = this.head.copy();
         this.body.push(head);
+        info.innerHTML = this.body.length;
     }
 
     eat(x, y) {
