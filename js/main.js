@@ -1,18 +1,18 @@
-const start = document.getElementById('startGame');
+const start = document.getElementById('start');
 const mode = document.getElementById('mode');
 const end = document.getElementById('gameOver');
-const info = document.getElementById('info');
+const info = document.getElementById('tail');
 const goal = document.getElementById('goal');
-const btn1 = document.getElementById('startBtn');
-const btn2 = document.getElementById('endBtn');
-const btn3 = document.getElementById('fullscreenBtn');
-const btn4 = document.getElementById('soundsBtn');
-const btn5 = document.getElementById('newMode');
-const btn6 = document.getElementById('classicMode');
-const btn7 = document.getElementById('menuBtn');
+
+/* Uložení tlačítek do pole btn */
+let btn = ['startBtn1', 'modeBtn1', 'modeBtn2', 'gameOverBtn1', 'gameOverBtn2', 'fullscreenBtn', 'soundsBtn'];
+for (let i = 0; i < btn.length; i++) {
+    btn[i] = document.getElementById(btn[i]);
+}
 
 let sound1, sound2;
 let canvas;
+/* Proměnná scl značí velikost elementů hry */
 let scl = 20;
 let snake;
 let food;
@@ -27,10 +27,12 @@ class Snake {
         this.sY = speedY;
     }
 
+    /* Funkce get head() vrací hlavičku hada */
     get head() {
         return this.body[this.body.length - 1];
     }
 
+    /* Pohyb hada pomocí rychlosti vynásobené velikostí jednoho skoku */
     move() {
         let head = this.head.copy();
         this.body.shift();
@@ -39,6 +41,7 @@ class Snake {
         this.body.push(head);
     }
 
+    /* Ovládání pomocí kláves WASD */
     controls() {
         if (keyIsDown(87)) {
             if (this.sY != 1) {
@@ -80,6 +83,7 @@ class Snake {
         return false;
     }
 
+    /* Hra skončí, když had narazí do stěny canvasu, do překážky nebo sám do sebe */
     end() {
         if (this.head.x > width - 1 || this.head.x < 0 || this.head.y > height - 1 || this.head.y < 0) return true;
         for (let i = 0; i < obstacles.length; i++) {
@@ -105,6 +109,7 @@ class Food {
         this.h = floor(height / scl);
     }
 
+    /* Jídlo se náhodně objeví na poli, kde se nenachází had */
     location() {
         this.x = floor(random(this.w)) * scl;
         this.y = floor(random(this.h)) * scl;
@@ -139,10 +144,11 @@ class Obstacle {
     }
 }
 
+/* Funkce startGame(), modeSelect() a endGame() se starají o celé navigační menu a reset */
 function startGame() {
     noLoop();
     start.classList.add('visible');
-    btn1.addEventListener('click', () => {
+    btn[0].addEventListener('click', () => {
         start.classList.remove('visible');
         modeSelect();
     });
@@ -150,7 +156,7 @@ function startGame() {
 
 function modeSelect() {
     mode.classList.add('visible');
-    btn6.addEventListener('click', () => {
+    btn[2].addEventListener('click', () => {
         mode.classList.remove('visible');
         snake = new Snake(0, 0, 1, 0);
         snake.grow();
@@ -159,7 +165,7 @@ function modeSelect() {
         obstacles.length = 0;
         loop();
     });
-    btn5.addEventListener('click', () => {
+    btn[1].addEventListener('click', () => {
         mode.classList.remove('visible');
         snake = new Snake(0, 0, 1, 0);
         snake.grow();
@@ -181,7 +187,7 @@ function modeSelect() {
 function endGame() {
     noLoop();
     end.classList.add('visible');
-    btn2.addEventListener('click', () => {
+    btn[3].addEventListener('click', () => {
         end.classList.remove('visible');
         snake = new Snake(0, 0, 1, 0);
         snake.grow();
@@ -189,7 +195,7 @@ function endGame() {
         loop();
         food.location();
     });
-    btn7.addEventListener('click', () => {
+    btn[4].addEventListener('click', () => {
         end.classList.remove('visible');
         modeSelect();
     });
@@ -204,9 +210,9 @@ function checkWin() {
 
 function fullscreenToggle() {
     let j = 0;
-    btn3.addEventListener('click', () => {
-        if (j % 2 == 0) btn3.classList.add('selected');
-        else btn3.classList.remove('selected');
+    btn[5].addEventListener('click', () => {
+        if (j % 2 == 0) btn[5].classList.add('selected');
+        else btn[5].classList.remove('selected');
         let fs = fullscreen();
         fullscreen(!fs);
         j++;
@@ -217,13 +223,13 @@ function soundsToggle() {
     let j = 0;
     sound1.setVolume(0.0);
     sound2.setVolume(0.0);
-    btn4.addEventListener('click', () => {
+    btn[6].addEventListener('click', () => {
         if (j % 2 == 0) {
-            btn4.classList.add('selected');
+            btn[6].classList.add('selected');
             sound1.setVolume(1.0);
             sound2.setVolume(1.0);
         } else {
-            btn4.classList.remove('selected');
+            btn[6].classList.remove('selected');
             sound1.setVolume(0.0);
             sound2.setVolume(0.0);
         }

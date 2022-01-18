@@ -27,8 +27,12 @@ body {
     background-color: #16c60c;
 }
 
+#myCanvas {
+    position: absolute;
+}
+
 #settings,
-#infobox {
+#info {
     font-size: x-small;
     position: fixed;
     bottom: 30px;
@@ -39,15 +43,11 @@ body {
     right: 30px;
 }
 
-#infobox {
+#info {
     left: 30px;
 }
 
-#myCanvas {
-    position: absolute;
-}
-
-#startGame,
+#start,
 #mode,
 #gameOver {
     position: absolute;
@@ -62,38 +62,28 @@ body {
     z-index: 99;
 }
 
-#startBtn:hover,
-#endBtn:hover,
-#newMode:hover,
-#classicMode:hover,
-#menuBtn:hover,
-#info,
-#wasd,
+a:hover,
+#controls,
+#tail,
 #goal {
     color: #16c60c;
 }
 
-#endBtn,
-#newMode,
-#classicMode,
-#menuBtn {
+#modeBtn1,
+#modeBtn2,
+#gameOverBtn1,
+#gameOverBtn2 {
     font-size: small;
 }
 
-#startBtn,
-#endBtn,
-#fullscreenBtn,
-#soundsBtn,
-#newMode,
-#classicMode,
-#menuBtn {
+a {
     cursor: pointer;
 }
 
 #fullscreenBtn,
 #soundsBtn,
-#info,
-#wasd,
+#controls,
+#tail,
 #goal {
     margin-right: 1em;
     margin-left: 1em;
